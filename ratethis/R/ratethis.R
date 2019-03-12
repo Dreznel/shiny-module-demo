@@ -3,7 +3,7 @@
 #' @param label
 #' @import shiny
 #' @export
-rtInput <- function(id, label = "Thing to Rate") {
+ratethisInput <- function(id, label = "Thing to Rate") {
 
   # Create a namespace function using the provided id
   ns <- shiny::NS(id)
@@ -12,18 +12,16 @@ rtInput <- function(id, label = "Thing to Rate") {
       width = 3,
       shiny::radioButtons(
         inputId = ns("rating"),
+        label = "Rating",
         choices = c(
-          "☆",
-          "☆☆",
-          "☆☆☆",
-          "☆☆☆☆",
-          "☆☆☆☆☆"
+          "oneStar" = "☆",
+          "twoStars" = "☆☆",
+          "threeStars" = "☆☆☆",
+          "fourStars" = "☆☆☆☆",
+          "fiveStars" = "☆☆☆☆☆"
         )
-      )
-    ),
-    shiny::column(
-      width = 9,
-      shiny::imageOutput("content")
+      ),
+      shiny::actionButton(ns("submit"), label = "Submit")
     )
   )
 }
@@ -31,22 +29,17 @@ rtInput <- function(id, label = "Thing to Rate") {
 #' @param input
 #' @param output
 #' @param session
-#' @param image_to_rate
 #' @export
 #' @import shiny
-rtOutput <- function(input, output, session, image_to_rate) {
+ratethis <- function(input, output, session) {
 
   returnValues = shiny::reactiveValues()
   returnValues$rating = "Not rated."
 
-  observe(
-    output$content <- renderImage(image_to_rate)
-  )
-
-  observeEvent(input$rating, {
-    returnValues$rating <- input$rating
+  result <- eventReactive(input$submit, {
+    input$rating
   })
 
-  return(returnValues$rating)
+  return(result)
 
 }
