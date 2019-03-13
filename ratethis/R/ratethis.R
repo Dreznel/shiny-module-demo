@@ -14,11 +14,11 @@ ratethisInput <- function(id, label = "Thing to Rate") {
         inputId = ns("rating"),
         label = "Rating",
         choices = c(
-          "oneStar" = "☆",
-          "twoStars" = "☆☆",
-          "threeStars" = "☆☆☆",
-          "fourStars" = "☆☆☆☆",
-          "fiveStars" = "☆☆☆☆☆"
+          "☆",
+          "☆☆",
+          "☆☆☆",
+          "☆☆☆☆",
+          "☆☆☆☆☆"
         )
       ),
       shiny::actionButton(ns("submit"), label = "Submit")

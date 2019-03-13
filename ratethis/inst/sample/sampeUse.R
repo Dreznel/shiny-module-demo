@@ -1,14 +1,10 @@
 ui <- shiny::fluidPage(
-  shiny::sidebarPanel(
-    # shiny::actionButton("fetchButton", label = "Button, Sir"),
-    shiny::textOutput("ratingForCurrentCat")
-
-  ),
   shiny::mainPanel(
     # ratethis::ratethisInput("catRating", label = "This cat"),
     # ratethis::catDispenserUi("catDispenser1", label = "GIMME DAT KITTEH"),
     # ratethis::catDispenserOutput("catDispenser1", label = "Label?"),
-    ratethis::catRaterUi(id = "catRater")
+    ratethis::catRaterUi(id = "catRater"),
+    shiny::textOutput("ratingForCurrentCat")
   )
 )
 

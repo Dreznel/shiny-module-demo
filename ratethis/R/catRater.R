@@ -1,17 +1,20 @@
 
 #' @param id
 #' @export
-#' @importFrom shiny fluidPage fluidRow actionButton
+#' @importFrom shiny fluidPage fluidRow actionButton sidebarPanel mainPanel titlePanel
 catRaterUi <- function(id) {
   ns <- shiny::NS(id)
   return(
     shiny::bootstrapPage(
       shiny::titlePanel("Cat Rater Demo"),
-
-      shiny::fluidRow(
-        ratethis::catDispenserUi(id = ns("catDispenserImage"), label = "New Cat"),
-        ratethis::catDispenserOutput(ns("catDispenserImage"), label = "Cat Picture"),
+      shiny::sidebarPanel(
         ratethis::ratethisInput(ns("catRating"), label = "Rate this Cat!")
+      ),
+
+      shiny::mainPanel(
+        ratethis::catDispenserUi(id = ns("catDispenserImage"), label = "New Cat"),
+        ratethis::catDispenserOutput(ns("catDispenserImage"), label = "Cat Picture")
+
         # shiny::actionButton(ns("submitRating"), "Submit")
       )
     )

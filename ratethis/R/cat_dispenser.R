@@ -23,7 +23,7 @@ catDispenserOutput <- function(id, label) {
       shiny::wellPanel(
         shiny::tags$head(shiny::tags$style(
           type="text/css",
-          "img {max-width: 600; width: 100%; height: auto}"
+          "img {max-width: 400px; max-height: 300px; width: auto; height: auto}"
         )),
 
         shiny::imageOutput(
@@ -64,8 +64,6 @@ catDispenser <- function(input, output, session) {
       )
     }, deleteFile = TRUE)
   })
-
-
 }
 
 # Run the application
