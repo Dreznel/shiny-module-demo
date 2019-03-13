@@ -1,17 +1,6 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-##
-##library(shiny)
-##library(httr)
-##library(imager)
 
-#' @param id
+
+#' @param id module id
 #' @export
 catDispenserUi <- function(id, label = "New Kitty!") {
 
@@ -22,13 +11,26 @@ catDispenserUi <- function(id, label = "New Kitty!") {
 
 }
 
-#' @param id
+#' @param id module id
 #' @param label
+#' @importFrom glue glue
+#' @importFrom shiny bootstrapPage wellPanel tags imageOutput
 #' @export
 catDispenserOutput <- function(id, label) {
   ns <- shiny::NS(id)
   return({
-    shiny::imageOutput(ns("catPic"))
+    shiny::bootstrapPage(
+      shiny::wellPanel(
+        shiny::tags$head(shiny::tags$style(
+          type="text/css",
+          "img {max-width: 600; width: 100%; height: auto}"
+        )),
+
+        shiny::imageOutput(
+          ns("catPic")
+        )
+      )
+    )
   })
 }
 
@@ -38,6 +40,9 @@ catDispenserOutput <- function(id, label) {
 #' @importFrom httr GET content
 #' @export
 catDispenser <- function(input, output, session) {
+
+  # returnValues <- shiny::reactiveValues()
+  # returnValues$ratingSubmitted <- -1
 
   observeEvent(input$catButton, {
     cat("New Kitty button pressed.")
@@ -59,6 +64,8 @@ catDispenser <- function(input, output, session) {
       )
     }, deleteFile = TRUE)
   })
+
+
 }
 
 # Run the application
